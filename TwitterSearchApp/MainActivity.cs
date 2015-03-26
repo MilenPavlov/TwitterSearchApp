@@ -5,6 +5,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using TwitterSearch.Portable.Models;
 
 namespace TwitterSearchApp
 {
@@ -32,7 +33,7 @@ namespace TwitterSearchApp
         {
             using (var service = new RequestService())
             {
-                service.SetUpAuth();
+                service.SetUpAuth(Constants.ConsumerKey, Constants.AccessTokenSecret, Constants.ConsumerKey, Constants.ConsumerSecret);
             }
         }
 
@@ -41,6 +42,15 @@ namespace TwitterSearchApp
             searchText = this.FindViewById<EditText>(Resource.Id.editTextSearchText);
             searchRadius = this.FindViewById<EditText>(Resource.Id.editTextSearchRadius);
             searchButton = this.FindViewById<Button>(Resource.Id.buttonSearch);
+            searchButton.Click += async (sender, args) =>
+            {
+                using (var service = new RequestService())
+                {
+                    await service.DoTwitterSearchAsync(searchText.Text, Convert.ToInt32(searchRadius.Text));
+                }
+            };
+
+
         }
     }
 }

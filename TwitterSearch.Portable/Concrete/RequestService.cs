@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace TwitterSearch.Portable.Concrete
 {
@@ -18,7 +19,7 @@ namespace TwitterSearch.Portable.Concrete
             TwitterCredentials.SetCredentials(accessToken, accessTokenSecret, consumerKey, consumerKeySecret);
         }
 
-        public async Task<string> DoTwitterSerachAsync(string queryString, int radiusInMiles)
+        public async Task<string> DoTwitterSearchAsync(string queryString, int radiusInMiles)
         {
             // Complex search
             var searchParameter = Search.GenerateTweetSearchParameter("tweetinvi");
@@ -31,7 +32,19 @@ namespace TwitterSearch.Portable.Concrete
             searchParameter.MaxId = 405001488843284480;
             var tweets = await SearchAsync.SearchTweets(searchParameter);
 
-            return tweets.ToString();
+            try
+            {
+                return JsonConvert.SerializeObject(tweets, Formatting.Indented, new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Serialize
+                });
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+  
         }
 
         private bool disposed;
@@ -57,6 +70,5 @@ namespace TwitterSearch.Portable.Concrete
             disposed = true;
             // Call base class implementation.         
         }
-
     }
 }

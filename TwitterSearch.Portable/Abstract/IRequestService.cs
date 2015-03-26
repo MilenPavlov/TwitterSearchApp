@@ -10,6 +10,6 @@ namespace TwitterSearch.Portable.Abstract
     {
         void SetUpAuth(string accessToken, string accessTokenSecret, string consumerKey, string consumerKeySecret);
 
-        Task<string> DoTwitterSerachAsync(string queryString, int radiusInMiles);
+        Task<string> DoTwitterSearchAsync(string queryString, int radiusInMiles);
     }
 }
