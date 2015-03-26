@@ -71,6 +71,12 @@
   <ItemGroup>
     <Content Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TwitterSearch.Portable\TwitterSearch.Portable.csproj">
+      <Project>{bcfa0802-2846-4fe8-83a9-7cbf179ae30a}</Project>
+      <Name>TwitterSearch.Portable</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
      Other similar extension points exist, see Microsoft.Common.targets.

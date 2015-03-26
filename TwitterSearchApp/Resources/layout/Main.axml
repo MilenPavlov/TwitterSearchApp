@@ -72,7 +72,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/editText1"
+                        android:id="@+id/editTextSearchText"
                         android:layout_weight="1" />
                 </LinearLayout>
             </LinearLayout>
@@ -120,7 +120,7 @@
                             android:inputType="number"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:id="@+id/editText2"
+                            android:id="@+id/editTextSearchRadius"
                             android:layout_weight="1" />
                     </LinearLayout>
                     <LinearLayout
@@ -134,7 +134,7 @@
                         android:gravity="right">
                         <Button
                             android:text="Search!!"
-                            android:id="@+id/button1"
+                            android:id="@+id/buttonSearch"
                             android:layout_width="100dp"
                             android:layout_height="match_parent" />
                     </LinearLayout>

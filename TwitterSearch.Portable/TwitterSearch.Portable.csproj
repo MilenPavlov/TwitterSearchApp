@@ -43,6 +43,7 @@
     <Compile Include="Abstract\IRequestService.cs" />
     <Compile Include="Concrete\HttpHelper.cs" />
     <Compile Include="Concrete\RequestService.cs" />
+    <Compile Include="Models\Constants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
