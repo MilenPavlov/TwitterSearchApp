@@ -9,12 +9,15 @@ using TwitterSearch.Portable.Models;
 
 namespace TwitterSearchApp
 {
+    using System.Threading.Tasks;
+
     using TwitterSearch.Portable.Concrete;
 
     [Activity(Label = "Twitter Search App", MainLauncher = true, Icon = "@drawable/icon")]
 
     public class MainActivity : Activity
     {
+        private object twitterToken; 
         private EditText searchText, searchRadius;
 
         private Button searchButton;
@@ -29,11 +32,17 @@ namespace TwitterSearchApp
             SetUpCredentials();
         }
 
-        private void SetUpCredentials()
+        private async void SetUpCredentials()
         {
             using (var service = new RequestService())
             {
-                service.SetUpAuth(Constants.ConsumerKey, Constants.AccessTokenSecret, Constants.ConsumerKey, Constants.ConsumerSecret);
+                //service.SetUpAuth(Constants.ConsumerKey, Constants.AccessTokenSecret, Constants.ConsumerKey, Constants.ConsumerSecret);
+                twitterToken =  await service.GetAccessToken();
+
+                if (twitterToken != null)
+                {
+                    
+                }
             }
         }
 
@@ -48,6 +57,8 @@ namespace TwitterSearchApp
                 {
                     await service.DoTwitterSearchAsync(searchText.Text, Convert.ToInt32(searchRadius.Text));
                 }
+
+                
             };
 
 

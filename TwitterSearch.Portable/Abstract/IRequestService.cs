@@ -11,5 +11,7 @@ namespace TwitterSearch.Portable.Abstract
         void SetUpAuth(string accessToken, string accessTokenSecret, string consumerKey, string consumerKeySecret);
 
         Task<string> DoTwitterSearchAsync(string queryString, int radiusInMiles);
+
+        Task<object> GetAccessToken();
     }
 }

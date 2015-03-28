@@ -9,6 +9,7 @@ namespace TwitterSearch.Portable.Concrete
 {
     using Tweetinvi;
     using Tweetinvi.Core.Enum;
+    using Tweetinvi.Core.Interfaces.Credentials;
 
     using TwitterSearch.Portable.Abstract;
 
@@ -45,6 +46,14 @@ namespace TwitterSearch.Portable.Concrete
                 throw;
             }
   
+        }
+
+        public async Task<object> GetAccessToken()
+        {
+            using (var client = new HttpHelper())
+            {
+                return await client.GeTokenAsync();
+            }
         }
 
         private bool disposed;
