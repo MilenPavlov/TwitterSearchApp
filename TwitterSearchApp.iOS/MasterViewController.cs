@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Drawing;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Foundation;
 using GalaSoft.MvvmLight.Helpers;
-using TwitterSearch.Portable.Concrete;
-using TwitterSearch.Portable.Models;
 using TwitterSearch.Portable.ViewModels;
 using UIKit;
 
@@ -29,8 +25,8 @@ namespace TwitterSearchApp.iOS
 			await _viewModel.Initialise(() =>
 			{
 				var tableViewController = _viewModel.Tweets.GetController(CreateCommentCell, BindCommentCell);
-				AddSearchBar(tableViewController);
 				AddChildViewController(tableViewController);
+				AddSearchBar(tableViewController);
 				AddView(tableViewController);
 			});
 		}
@@ -43,17 +39,13 @@ namespace TwitterSearchApp.iOS
 
 		private void AddSearchBar(UITableViewController tableViewController)
 		{
-			_searchController = new UISearchController(tableViewController)
+			_searchController = new UISearchController(searchResultsController: null)
 			{
 				SearchResultsUpdater = this,
-				DimsBackgroundDuringPresentation = false
+				DimsBackgroundDuringPresentation = true,
 			};
 
-			_searchController.SearchBar.Frame = new RectangleF(
-				(float) _searchController.SearchBar.Frame.X,
-				(float) _searchController.SearchBar.Frame.Y,
-				(float) _searchController.SearchBar.Frame.Width,
-				44f);
+			_searchController.SearchBar.SizeToFit();
 
 			tableViewController.TableView.TableHeaderView = _searchController.SearchBar;
 			DefinesPresentationContext = true;
@@ -75,11 +67,11 @@ namespace TwitterSearchApp.iOS
 		{
 			viewController.TableView.Frame = new RectangleF(
 				(float)viewController.TableView.Frame.X,
-				(float)viewController.View.Frame.Y,
+				(float)ContentView.Frame.Y,
 				(float)View.Frame.Width,
 				(float)View.Frame.Height);
 
-			Add(viewController.TableView);
+			ContentView.Add(viewController.TableView);
 		}
 	}
 }
