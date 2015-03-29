@@ -77,11 +77,11 @@ namespace TwitterSearchApp
 
         private void PopulateListView(TweetsViewModel result)
         {
-            var tweets = result.Tweets.Select(tweet =>tweet.User + " " + tweet.Text).ToList<string>();
+            var tweets = result.Tweets.ToList<TweetViewModel>();
 
-            if (result != null)
+            if (tweets != null)
             {
-                var adapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleListItem1, tweets);
+                var adapter = new TweetsAdapter(this, tweets);
                 listViewData.Adapter = adapter;
             }
         }

@@ -1,4 +1,5 @@
-﻿using TwitterSearch.Portable.Models;
+﻿using System.Linq;
+using TwitterSearch.Portable.Models;
 using TwitterSearch.Portable.ViewModels;
 
 namespace TwitterSearch.Portable.Concrete
@@ -14,7 +15,8 @@ namespace TwitterSearch.Portable.Concrete
                 var tweet = new TweetViewModel
                 {
                     User = $"@{status.user.screen_name}",
-                    Text = status.text
+                    Text = status.text,
+                    //ImageUrl = status.user.entities.url.urls.FirstOrDefault() == null ? string.Empty : status.user.entities.url.urls.FirstOrDefault().expanded_url
                 };
                 viewModel.Tweets.Add(tweet);
             }
