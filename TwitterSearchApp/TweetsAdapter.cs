@@ -2,6 +2,7 @@ using Android.App;
 using Android.Views;
 using Android.Widget;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Net;
 using System.Threading.Tasks;
 using Android.Graphics;
@@ -12,9 +13,9 @@ namespace TwitterSearchApp
     public class TweetsAdapter : BaseAdapter<TweetViewModel>
     {
         private readonly Activity _context;
-        private readonly List<TweetViewModel> _tweets;
+        private readonly ObservableCollection<TweetViewModel> _tweets;
 
-        public TweetsAdapter(Activity context, List<TweetViewModel> tweets)
+        public TweetsAdapter(Activity context, ObservableCollection<TweetViewModel> tweets)
         {
             _context = context;
             _tweets = tweets;

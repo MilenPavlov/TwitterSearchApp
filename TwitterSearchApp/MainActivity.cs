@@ -5,6 +5,7 @@ using Android.Content.PM;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using GalaSoft.MvvmLight.Helpers;
 using TwitterSearch.Portable.Models;
 using TwitterSearch.Portable.ViewModels;
 
@@ -34,12 +35,13 @@ namespace TwitterSearchApp
 
             SetUpCredentials();
 
-            //SetBundings();
+            SetBundings();
         }
 
         private void SetBundings()
         {
-            throw new NotImplementedException();
+            viewModel.SetBinding(() => viewModel.Tweets)
+                .WhenSourceChanges(PopulateListView);
         }
 
         private async void SetUpCredentials()
@@ -47,7 +49,7 @@ namespace TwitterSearchApp
             viewModel = new TweetsViewModel();
             await viewModel.Initialise(() =>
             {
-                
+                PopulateListView();
             }, true);
         }
 
@@ -73,7 +75,7 @@ namespace TwitterSearchApp
 
                 await viewModel.GetTweets(searchText.Text, Convert.ToInt32(searchRadius.Text));    
                 
-                PopulateListView();              
+                //PopulateListView();              
             };
         }
 
@@ -97,8 +99,11 @@ namespace TwitterSearchApp
             
             if (viewModel.Tweets != null)
             {
-                var adapter = new TweetsAdapter(this, viewModel.Tweets.ToList<TweetViewModel>());
-                listViewData.Adapter = adapter;
+                RunOnUiThread(() =>
+                {
+                    var adapter = new TweetsAdapter(this, viewModel.Tweets);
+                    listViewData.Adapter = adapter;
+                });
             }
         }
     }
