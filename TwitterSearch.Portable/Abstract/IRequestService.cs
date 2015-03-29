@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace TwitterSearch.Portable.Abstract
 {
+    using TwitterSearch.Portable.Models;
+
     public interface IRequestService : IDisposable
     {
         void SetUpAuth(string accessToken, string accessTokenSecret, string consumerKey, string consumerKeySecret);
 
         Task<string> DoTwitterSearchAsync(string queryString, int radiusInMiles);
 
-        Task<object> GetAccessToken();
+        Task<Token> GetAccessToken();
     }
 }

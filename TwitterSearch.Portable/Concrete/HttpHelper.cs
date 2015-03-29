@@ -10,6 +10,7 @@ namespace TwitterSearch.Portable.Concrete
     using System.IO.Compression;
     using System.Net.Http;
     using System.Net.Http.Headers;
+    using System.Reflection;
 
     using Newtonsoft.Json;
 
@@ -31,7 +32,7 @@ namespace TwitterSearch.Portable.Concrete
             BaseUrl = "";
         }
 
-        public async Task<object> GeTokenAsync()
+        public async Task<Token> GeTokenAsync()
         {
           
             using (var client = new HttpClient())
@@ -57,11 +58,27 @@ namespace TwitterSearch.Portable.Concrete
                 using (var streamReader = new StreamReader(decompressedStream))
                 {
                     var rawJWt = streamReader.ReadToEnd();
-                    var jwt = JsonConvert.DeserializeObject(rawJWt);
+                    var jwt = JsonConvert.DeserializeObject<Token>(rawJWt);
 
                     return jwt;
                 }               
             };
+        }
+
+        public async Task<string> SearchTwitter(string srchStr, string token)
+        {
+            var searchUrl = string.Format("https://api.twitter.com/1.1/search/tweets.json?q={0}", srchStr);
+            var uri = new Uri(searchUrl);
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", token));
+
+                var response = await client.GetAsync(uri);
+
+                string content = await response.Content.ReadAsStringAsync();
+
+                return content;
+            }
         }
 
         public string ConvertToUrlParameters(Dictionary<string, string> keyValueCollection)

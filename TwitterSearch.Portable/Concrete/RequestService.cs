@@ -12,9 +12,14 @@ namespace TwitterSearch.Portable.Concrete
     using Tweetinvi.Core.Interfaces.Credentials;
 
     using TwitterSearch.Portable.Abstract;
+    using TwitterSearch.Portable.Models;
 
     public class RequestService : IRequestService
     {
+        private const string longitude = "-1.8939172029495";
+
+        private const string latitude = "52.47794740466092";
+ 
         public void SetUpAuth(string accessToken, string accessTokenSecret, string consumerKey, string consumerKeySecret)
         {
             TwitterCredentials.SetCredentials(accessToken, accessTokenSecret, consumerKey, consumerKeySecret);
@@ -48,13 +53,38 @@ namespace TwitterSearch.Portable.Concrete
   
         }
 
-        public async Task<object> GetAccessToken()
+        public async Task<Token> GetAccessToken()
         {
             using (var client = new HttpHelper())
             {
                 return await client.GeTokenAsync();
             }
         }
+
+        public async Task<string> SearchTweetsAsync(string query, int radiusInMiles, string token)
+        {
+            var querystring = CreateQueryStrung(query, radiusInMiles);
+
+            using (var helper = new HttpHelper())
+            {
+                var response = await helper.SearchTwitter(querystring, token);
+
+                return response;
+            }
+        }
+
+        private string CreateQueryStrung(string query, int radiusInMiles)
+        {
+            var builder = new StringBuilder();
+            var encodedQuery = Uri.EscapeUriString(query);
+            builder.Append(encodedQuery);
+            var encodedRadius =
+                Uri.EscapeUriString(string.Format("&geocode={0},{1},{2}mi", latitude, longitude, radiusInMiles));
+            builder.Append(encodedRadius);
+
+            return builder.ToString();
+        }
+
 
         private bool disposed;
         public void Dispose()

@@ -17,7 +17,7 @@ namespace TwitterSearchApp
 
     public class MainActivity : Activity
     {
-        private object twitterToken; 
+        private Token twitterToken; 
         private EditText searchText, searchRadius;
 
         private Button searchButton;
@@ -39,10 +39,6 @@ namespace TwitterSearchApp
                 //service.SetUpAuth(Constants.ConsumerKey, Constants.AccessTokenSecret, Constants.ConsumerKey, Constants.ConsumerSecret);
                 twitterToken =  await service.GetAccessToken();
 
-                if (twitterToken != null)
-                {
-                    
-                }
             }
         }
 
@@ -55,13 +51,23 @@ namespace TwitterSearchApp
             {
                 using (var service = new RequestService())
                 {
-                    await service.DoTwitterSearchAsync(searchText.Text, Convert.ToInt32(searchRadius.Text));
-                }
+                    if (twitterToken != null)
+                    {
+                        if (!string.IsNullOrEmpty(twitterToken.access_token))
+                        {
+                            var result = await service.SearchTweetsAsync(
+                                searchText.Text,
+                                Convert.ToInt32(searchRadius.Text),
+                                twitterToken.access_token);
 
-                
+                            if (!string.IsNullOrEmpty(result))
+                            {
+                                //do stuff
+                            }
+                        }                       
+                    }
+                }                
             };
-
-
         }
     }
 }
