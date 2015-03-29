@@ -77,9 +77,6 @@ namespace TwitterSearchApp
 			// aapt resource value: 0x7f05000d
 			public const int imageViewLoading = 2131034125;
 			
-			// aapt resource value: 0x7f05001b
-			public const int imageViewPostImage = 2131034139;
-			
 			// aapt resource value: 0x7f050000
 			public const int linearLayout1 = 2131034112;
 			

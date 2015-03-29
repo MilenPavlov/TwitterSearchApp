@@ -47,7 +47,6 @@ namespace TwitterSearch.Portable.Concrete
             return builder.ToString();
         }
 
-
         private bool disposed;
         public void Dispose()
         {

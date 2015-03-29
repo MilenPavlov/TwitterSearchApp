@@ -13,18 +13,21 @@ namespace TwitterSearch.Portable.ViewModels
 
 		private Token _twitterToken;
 
-		public async Task Initialise(Action action)
+		public async Task Initialise(Action action, bool startup = false)
 	    {
 			using (var service = new RequestService())
 			{
 				_twitterToken = await service.GetAccessToken();
 			}
 
-			await GetTweets();
-			action?.Invoke();
+		    if (!startup)
+		    {
+		        await GetTweets();
+		    }
+		    action?.Invoke();
 		}
 
-	    public async Task GetTweets(string searchString = "")
+	    public async Task GetTweets(string searchString = "", int rediusInMiles = 5)
 	    {
 			using (var service = new RequestService())
 			{
@@ -33,7 +36,7 @@ namespace TwitterSearch.Portable.ViewModels
 					return;
 				}
 
-				var list = await service.SearchTweetsAsync(searchString, 5, _twitterToken?.access_token);
+				var list = await service.SearchTweetsAsync(searchString, rediusInMiles, _twitterToken?.access_token);
 
 				Tweets.Clear();
 				foreach (var tweet in list)
