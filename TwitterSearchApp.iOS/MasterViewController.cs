@@ -1,54 +1,66 @@
 ﻿using System;
 using System.Drawing;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Foundation;
+using GalaSoft.MvvmLight.Helpers;
+using TwitterSearch.Portable.Concrete;
+using TwitterSearch.Portable.Models;
+using TwitterSearch.Portable.ViewModels;
 using UIKit;
 
 namespace TwitterSearchApp.iOS
 {
-	public partial class MasterViewController : UITableViewController
+	public partial class MasterViewController : UIViewController
 	{
-		private DataSource _dataSource;
-
-		public DetailViewController DetailViewController { get; set; }
+		private Token _twitterToken;
 
 		public MasterViewController(IntPtr handle) 
 			: base(handle)
 		{
-			Title = NSBundle.MainBundle.LocalizedString("Master", "Master");
 		}
-
-		void AddNewItem(object sender, EventArgs args)
-		{
-			_dataSource.Objects.Insert(0, DateTime.Now);
-
-			using (var indexPath = NSIndexPath.FromRowSection(0, 0))
-			{
-				TableView.InsertRows(new[] { indexPath }, UITableViewRowAnimation.Automatic);
-			}
-		}
-
-		public override void ViewDidLoad()
+			
+		public override async void ViewDidLoad()
 		{
 			base.ViewDidLoad();
 
-			NavigationItem.LeftBarButtonItem = EditButtonItem;
+			using (var service = new RequestService())
+			{
+				_twitterToken = await service.GetAccessToken();
+			}
 
-			var addButton = new UIBarButtonItem(UIBarButtonSystemItem.Add, AddNewItem);
-			NavigationItem.RightBarButtonItem = addButton;
-
-			TableView.Source = _dataSource = new DataSource(this);
+			await GetTweets();
 		}
 
-		public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
+		private async Task GetTweets()
 		{
-			if (segue.Identifier == "showDetail")
+			using (var service = new RequestService())
 			{
-				var indexPath = TableView.IndexPathForSelectedRow;
-				var item = _dataSource.Objects[indexPath.Row];
+				if (string.IsNullOrEmpty(_twitterToken?.access_token))
+				{
+					return;
+				}
 
-				((DetailViewController)segue.DestinationViewController).SetDetailItem(item);
+				var viewModel = await service.SearchTweetsAsync(string.Empty, 5, _twitterToken.access_token);
+				if (viewModel != null)
+				{
+					var tableViewController = viewModel.Tweets.GetController(CreateCommentCell, BindCommentCell);
+					AddChildViewController(tableViewController);
+					Add(tableViewController.View);
+				}
 			}
+		}
+
+		private static UITableViewCell CreateCommentCell(NSString reuseId)
+		{
+			return new UITableViewCell(UITableViewCellStyle.Subtitle, null);
+		}
+
+		private static void BindCommentCell(UITableViewCell cell, TweetViewModel tweetViewModel, NSIndexPath path)
+		{
+			cell.TextLabel.Text = tweetViewModel.User;
+			cell.DetailTextLabel.Text = tweetViewModel.Text;
+			//cell.AccessoryView = new UIImageView(UIImage.FromBundle(tweetViewModel.ImageName));
 		}
 	}
 }

@@ -84,7 +84,6 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="DataSource.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="app.config" />
@@ -93,10 +92,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DetailViewController.cs" />
-    <Compile Include="DetailViewController.designer.cs">
-      <DependentUpon>DetailViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="MasterViewController.cs" />
     <Compile Include="MasterViewController.designer.cs">
       <DependentUpon>MasterViewController.cs</DependentUpon>
@@ -130,7 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TwitterSearch.Portable\TwitterSearch.Portable.csproj">
-      <Project>{bcfa0802-2846-4fe8-83a9-7cbf179ae30a}</Project>
+      <Project>{BCFA0802-2846-4FE8-83A9-7CBF179AE30A}</Project>
       <Name>TwitterSearch.Portable</Name>
     </ProjectReference>
   </ItemGroup>
