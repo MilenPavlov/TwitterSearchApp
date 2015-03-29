@@ -10,10 +10,6 @@ namespace TwitterSearch.Portable.Abstract
 
     public interface IRequestService : IDisposable
     {
-        void SetUpAuth(string accessToken, string accessTokenSecret, string consumerKey, string consumerKeySecret);
-
-        Task<string> DoTwitterSearchAsync(string queryString, int radiusInMiles);
-
         Task<Token> GetAccessToken();
     }
 }

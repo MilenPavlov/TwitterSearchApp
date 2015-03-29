@@ -15,6 +15,6 @@ namespace TwitterSearch.Portable.Abstract
 
         Task<Token> GeTokenAsync();
 
-        Task<string> SearchTwitter(string srchStr, string token);
+        Task<TwitterSearchResponse> SearchTwitter(string srchStr, string token);
     }
 }

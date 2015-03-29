@@ -26,6 +26,8 @@ namespace TwitterSearchApp
 		
 		public static void UpdateIdValues()
 		{
+			global::GalaSoft.MvvmLight.Resource.String.ApplicationName = global::TwitterSearchApp.Resource.String.ApplicationName;
+			global::GalaSoft.MvvmLight.Resource.String.Hello = global::TwitterSearchApp.Resource.String.Hello;
 		}
 		
 		public partial class Attribute

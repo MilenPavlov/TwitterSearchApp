@@ -1,6 +1,7 @@
 ﻿using System;
 using Android.App;
 using Android.Content;
+using Android.Content.PM;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
@@ -13,8 +14,7 @@ namespace TwitterSearchApp
 
     using TwitterSearch.Portable.Concrete;
 
-    [Activity(Label = "Twitter Search App", MainLauncher = true, Icon = "@drawable/icon")]
-
+    [Activity(Label = "Twitter Search App", MainLauncher = true, Icon = "@drawable/icon", ScreenOrientation = ScreenOrientation.Landscape)]
     public class MainActivity : Activity
     {
         private Token twitterToken; 
@@ -60,7 +60,7 @@ namespace TwitterSearchApp
                                 Convert.ToInt32(searchRadius.Text),
                                 twitterToken.access_token);
 
-                            if (!string.IsNullOrEmpty(result))
+                            if (result != null)
                             {
                                 //do stuff
                             }

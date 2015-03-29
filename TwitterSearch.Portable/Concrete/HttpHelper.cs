@@ -23,7 +23,6 @@ namespace TwitterSearch.Portable.Concrete
         private string BaseUrl;
 
         private const string postBody = "grant_type=client_credentials";
-
         private const string oauth_url = "https://api.twitter.com/oauth2/token";
 
         //todo Add base url 
@@ -65,7 +64,7 @@ namespace TwitterSearch.Portable.Concrete
             };
         }
 
-        public async Task<string> SearchTwitter(string srchStr, string token)
+        public async Task<TwitterSearchResponse> SearchTwitter(string srchStr, string token)
         {
             var searchUrl = string.Format("https://api.twitter.com/1.1/search/tweets.json?q={0}", srchStr);
             var uri = new Uri(searchUrl);
@@ -75,9 +74,10 @@ namespace TwitterSearch.Portable.Concrete
 
                 var response = await client.GetAsync(uri);
 
-                string content = await response.Content.ReadAsStringAsync();
+                string content =  await response.Content.ReadAsStringAsync();
+                var tweets = JsonConvert.DeserializeObject<TwitterSearchResponse>(content);
 
-                return content;
+                return tweets;
             }
         }
 
