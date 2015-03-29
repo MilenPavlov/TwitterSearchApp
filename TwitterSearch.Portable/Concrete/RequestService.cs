@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using TwitterSearch.Portable.Abstract;
@@ -20,16 +22,16 @@ namespace TwitterSearch.Portable.Concrete
             }
         }
 
-        public async Task<TweetsViewModel> SearchTweetsAsync(string query, int radiusInMiles, string token)
+        public async Task<List<TweetViewModel>> SearchTweetsAsync(string query, int radiusInMiles, string token)
         {
             var querystring = CreateQueryString(query, radiusInMiles);
 
             using (var helper = new HttpHelper())
             {
                 var response = await helper.SearchTwitter(querystring, token);
-                var viewModel = TweetsViewModelFactory.Create(response);
+                var collection = TweetsCollectionFactory.Create(response);
 
-                return viewModel;
+                return collection;
             }
         }
 

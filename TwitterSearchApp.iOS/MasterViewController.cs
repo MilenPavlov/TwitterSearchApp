@@ -11,44 +11,52 @@ using UIKit;
 
 namespace TwitterSearchApp.iOS
 {
-	public partial class MasterViewController : UIViewController
+	public partial class MasterViewController : UIViewController, IUISearchResultsUpdating
 	{
-		private Token _twitterToken;
+		private readonly TweetsViewModel _viewModel;
+		private UISearchController _searchController;
 
 		public MasterViewController(IntPtr handle) 
 			: base(handle)
 		{
+			_viewModel = new TweetsViewModel();
 		}
-			
+
 		public override async void ViewDidLoad()
 		{
 			base.ViewDidLoad();
 
-			using (var service = new RequestService())
+			await _viewModel.Initialise(() =>
 			{
-				_twitterToken = await service.GetAccessToken();
-			}
-
-			await GetTweets();
+				var tableViewController = _viewModel.Tweets.GetController(CreateCommentCell, BindCommentCell);
+				AddSearchBar(tableViewController);
+				AddChildViewController(tableViewController);
+				AddView(tableViewController);
+			});
 		}
 
-		private async Task GetTweets()
+		public async void UpdateSearchResultsForSearchController(UISearchController searchController)
 		{
-			using (var service = new RequestService())
-			{
-				if (string.IsNullOrEmpty(_twitterToken?.access_token))
-				{
-					return;
-				}
+			var searchString = searchController.SearchBar.Text;
+			await _viewModel.GetTweets(searchString);
+		}
 
-				var viewModel = await service.SearchTweetsAsync(string.Empty, 5, _twitterToken.access_token);
-				if (viewModel != null)
-				{
-					var tableViewController = viewModel.Tweets.GetController(CreateCommentCell, BindCommentCell);
-					AddChildViewController(tableViewController);
-					Add(tableViewController.View);
-				}
-			}
+		private void AddSearchBar(UITableViewController tableViewController)
+		{
+			_searchController = new UISearchController(tableViewController)
+			{
+				SearchResultsUpdater = this,
+				DimsBackgroundDuringPresentation = false
+			};
+
+			_searchController.SearchBar.Frame = new RectangleF(
+				(float) _searchController.SearchBar.Frame.X,
+				(float) _searchController.SearchBar.Frame.Y,
+				(float) _searchController.SearchBar.Frame.Width,
+				44f);
+
+			tableViewController.TableView.TableHeaderView = _searchController.SearchBar;
+			DefinesPresentationContext = true;
 		}
 
 		private static UITableViewCell CreateCommentCell(NSString reuseId)
@@ -61,6 +69,17 @@ namespace TwitterSearchApp.iOS
 			cell.TextLabel.Text = tweetViewModel.User;
 			cell.DetailTextLabel.Text = tweetViewModel.Text;
 			//cell.AccessoryView = new UIImageView(UIImage.FromBundle(tweetViewModel.ImageName));
+		}
+
+		private void AddView(UITableViewController viewController)
+		{
+			viewController.TableView.Frame = new RectangleF(
+				(float)viewController.TableView.Frame.X,
+				(float)viewController.View.Frame.Y,
+				(float)View.Frame.Width,
+				(float)View.Frame.Height);
+
+			Add(viewController.TableView);
 		}
 	}
 }

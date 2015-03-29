@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,6 @@ namespace TwitterSearch.Portable.Abstract
     public interface IRequestService : IDisposable
     {
         Task<Token> GetAccessToken();
-        Task<TweetsViewModel> SearchTweetsAsync(string query, int radiusInMiles, string token);
+		Task<List<TweetViewModel>> SearchTweetsAsync(string query, int radiusInMiles, string token);
     }
 }

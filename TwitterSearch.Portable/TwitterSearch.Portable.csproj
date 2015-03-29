@@ -43,7 +43,7 @@
     <Compile Include="Abstract\IRequestService.cs" />
     <Compile Include="Concrete\HttpHelper.cs" />
     <Compile Include="Concrete\RequestService.cs" />
-    <Compile Include="Concrete\TweetsViewModelFactory.cs" />
+    <Compile Include="Concrete\TweetsCollectionFactory.cs" />
     <Compile Include="Models\Constants.cs" />
     <Compile Include="Models\Token.cs" />
     <Compile Include="Models\TwitterSearchResponse.cs" />
