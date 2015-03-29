@@ -12,7 +12,6 @@ namespace TwitterSearch.Portable.Concrete
         private const string Longitude = "-1.7889407873153";
         private const string Latitude = "52.38200776784398";
  
-
         public async Task<Token> GetAccessToken()
         {
             using (var client = new HttpHelper())
