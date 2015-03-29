@@ -10,9 +10,6 @@ namespace TwitterSearch.Portable.Abstract
 
     public interface IHttpHelper : IDisposable
     {
-        Task<T> GetAsync<T>(string relativeUrl, Dictionary<string, string> urlParameters) where T : class;
-        Task<T> GetAsync<T>(string relativeUrl) where T : class;
-
         Task<Token> GeTokenAsync();
 
         Task<TwitterSearchResponse> SearchTwitter(string srchStr, string token);

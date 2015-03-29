@@ -1,21 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using TwitterSearch.Portable.Abstract;
 using TwitterSearch.Portable.Models;
 using TwitterSearch.Portable.ViewModels;
 
 namespace TwitterSearch.Portable.Concrete
 {
-
-
     public class RequestService : IRequestService
     {
-        private const string longitude = "-1.7889407873153";
-        private const string latitude = "52.38200776784398";
+        private const string Longitude = "-1.7889407873153";
+        private const string Latitude = "52.38200776784398";
  
 
         public async Task<Token> GetAccessToken()
@@ -28,7 +23,7 @@ namespace TwitterSearch.Portable.Concrete
 
         public async Task<TweetsViewModel> SearchTweetsAsync(string query, int radiusInMiles, string token)
         {
-            var querystring = CreateQueryStrung(query, radiusInMiles);
+            var querystring = CreateQueryString(query, radiusInMiles);
 
             using (var helper = new HttpHelper())
             {
@@ -39,13 +34,13 @@ namespace TwitterSearch.Portable.Concrete
             }
         }
 
-        private string CreateQueryStrung(string query, int radiusInMiles)
+        private string CreateQueryString(string query, int radiusInMiles)
         {
             var builder = new StringBuilder();
             var encodedQuery = Uri.EscapeUriString(query);
             builder.Append(encodedQuery);
             var encodedRadius =
-                Uri.EscapeUriString(string.Format("&geocode={0},{1},{2}mi", latitude, longitude, radiusInMiles));
+                Uri.EscapeUriString(string.Format("&geocode={0},{1},{2}mi&count=15", Latitude, Longitude, radiusInMiles));
             builder.Append(encodedRadius);
 
             return builder.ToString();
