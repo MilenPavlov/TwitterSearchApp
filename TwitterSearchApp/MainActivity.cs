@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -7,6 +9,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using TwitterSearch.Portable.Models;
+using TwitterSearch.Portable.ViewModels;
 
 namespace TwitterSearchApp
 {
@@ -19,6 +22,7 @@ namespace TwitterSearchApp
     {
         private Token twitterToken; 
         private EditText searchText, searchRadius;
+        private ListView listViewData;
 
         private Button searchButton;
         protected override void OnCreate(Bundle bundle)
@@ -47,6 +51,7 @@ namespace TwitterSearchApp
             searchText = this.FindViewById<EditText>(Resource.Id.editTextSearchText);
             searchRadius = this.FindViewById<EditText>(Resource.Id.editTextSearchRadius);
             searchButton = this.FindViewById<Button>(Resource.Id.buttonSearch);
+            listViewData = FindViewById<ListView>(Resource.Id.listView1);
             searchButton.Click += async (sender, args) =>
             {
                 using (var service = new RequestService())
@@ -62,12 +67,23 @@ namespace TwitterSearchApp
 
                             if (result != null)
                             {
-                                //do stuff
+                                RunOnUiThread(()=>PopulateListView(result));
                             }
                         }                       
                     }
                 }                
             };
+        }
+
+        private void PopulateListView(TweetsViewModel result)
+        {
+            var tweets = result.Tweets.Select(tweet =>tweet.User + " " + tweet.Text).ToList<string>();
+
+            if (result != null)
+            {
+                var adapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleListItem1, tweets);
+                listViewData.Adapter = adapter;
+            }
         }
     }
 }

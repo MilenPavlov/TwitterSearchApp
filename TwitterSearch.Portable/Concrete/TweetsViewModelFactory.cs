@@ -11,7 +11,11 @@ namespace TwitterSearch.Portable.Concrete
 
             foreach (var status in response.statuses)
             {
-                var tweet = new TweetViewModel {Text = status.text};
+                var tweet = new TweetViewModel
+                {
+                    User = $"@{status.user.screen_name}",
+                    Text = status.text
+                };
                 viewModel.Tweets.Add(tweet);
             }
 
