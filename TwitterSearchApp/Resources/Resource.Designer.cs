@@ -47,7 +47,10 @@ namespace TwitterSearchApp
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int Icon = 2130837504;
+			public const int hourglass = 2130837504;
+			
+			// aapt resource value: 0x7f020001
+			public const int Icon = 2130837505;
 			
 			static Drawable()
 			{
@@ -62,8 +65,8 @@ namespace TwitterSearchApp
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f05000d
-			public const int buttonSearch = 2131034125;
+			// aapt resource value: 0x7f05000f
+			public const int buttonSearch = 2131034127;
 			
 			// aapt resource value: 0x7f05000c
 			public const int editTextSearchRadius = 2131034124;
@@ -71,26 +74,29 @@ namespace TwitterSearchApp
 			// aapt resource value: 0x7f050006
 			public const int editTextSearchText = 2131034118;
 			
-			// aapt resource value: 0x7f050019
-			public const int imageViewPostImage = 2131034137;
+			// aapt resource value: 0x7f05000d
+			public const int imageViewLoading = 2131034125;
+			
+			// aapt resource value: 0x7f05001b
+			public const int imageViewPostImage = 2131034139;
 			
 			// aapt resource value: 0x7f050000
 			public const int linearLayout1 = 2131034112;
 			
-			// aapt resource value: 0x7f05000f
-			public const int linearLayout10 = 2131034127;
-			
-			// aapt resource value: 0x7f050010
-			public const int linearLayout11 = 2131034128;
+			// aapt resource value: 0x7f050011
+			public const int linearLayout10 = 2131034129;
 			
 			// aapt resource value: 0x7f050012
-			public const int linearLayout12 = 2131034130;
+			public const int linearLayout11 = 2131034130;
 			
 			// aapt resource value: 0x7f050014
-			public const int linearLayout13 = 2131034132;
+			public const int linearLayout12 = 2131034132;
 			
-			// aapt resource value: 0x7f05000e
-			public const int linearLayout2 = 2131034126;
+			// aapt resource value: 0x7f050016
+			public const int linearLayout13 = 2131034134;
+			
+			// aapt resource value: 0x7f050010
+			public const int linearLayout2 = 2131034128;
 			
 			// aapt resource value: 0x7f050001
 			public const int linearLayout3 = 2131034113;
@@ -113,11 +119,11 @@ namespace TwitterSearchApp
 			// aapt resource value: 0x7f05000b
 			public const int linearLayout9 = 2131034123;
 			
-			// aapt resource value: 0x7f050016
-			public const int linearLayoutPostAuthor = 2131034134;
+			// aapt resource value: 0x7f050018
+			public const int linearLayoutPostAuthor = 2131034136;
 			
-			// aapt resource value: 0x7f050015
-			public const int listView1 = 2131034133;
+			// aapt resource value: 0x7f050017
+			public const int listView1 = 2131034135;
 			
 			// aapt resource value: 0x7f050002
 			public const int textView1 = 2131034114;
@@ -128,17 +134,20 @@ namespace TwitterSearchApp
 			// aapt resource value: 0x7f050009
 			public const int textView3 = 2131034121;
 			
-			// aapt resource value: 0x7f050011
-			public const int textView4 = 2131034129;
-			
 			// aapt resource value: 0x7f050013
-			public const int textView5 = 2131034131;
+			public const int textView4 = 2131034131;
 			
-			// aapt resource value: 0x7f050017
-			public const int textViewPostAuthor = 2131034135;
+			// aapt resource value: 0x7f050015
+			public const int textView5 = 2131034133;
 			
-			// aapt resource value: 0x7f050018
-			public const int textViewPostText = 2131034136;
+			// aapt resource value: 0x7f05000e
+			public const int textViewLoading = 2131034126;
+			
+			// aapt resource value: 0x7f050019
+			public const int textViewPostAuthor = 2131034137;
+			
+			// aapt resource value: 0x7f05001a
+			public const int textViewPostText = 2131034138;
 			
 			static Id()
 			{

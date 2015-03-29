@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\AndroidManifest.xml" />
+    <AndroidResource Include="Resources\drawable\hourglass.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TwitterSearch.Portable\TwitterSearch.Portable.csproj">

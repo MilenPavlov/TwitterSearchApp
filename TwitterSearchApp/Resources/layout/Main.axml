@@ -125,7 +125,7 @@
                             android:layout_weight="1"
                             android:text="5"
                             android:layout_gravity="end"
-                            android:gravity="end" />
+                            android:gravity="center" />
                     </LinearLayout>
                     <LinearLayout
                         android:orientation="horizontal"
@@ -136,6 +136,19 @@
                         android:id="@+id/linearLayout9"
                         android:layout_weight="1"
                         android:gravity="right">
+                        <ImageView
+                            android:src="@drawable/hourglass"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:id="@+id/imageViewLoading" />
+                        <TextView
+                            android:text="Loading...."
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:id="@+id/textViewLoading"
+                            android:gravity="center_vertical"
+                            android:layout_marginRight="15dp" />
                         <Button
                             android:text="Search!!"
                             android:id="@+id/buttonSearch"

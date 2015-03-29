@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Android.App;
-using Android.Content;
 using Android.Content.PM;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
@@ -13,16 +10,16 @@ using TwitterSearch.Portable.ViewModels;
 
 namespace TwitterSearchApp
 {
-    using System.Threading.Tasks;
-
     using TwitterSearch.Portable.Concrete;
 
-    [Activity(Label = "Twitter Search App", MainLauncher = true, Icon = "@drawable/icon", ScreenOrientation = ScreenOrientation.Landscape)]
+    [Activity(Label = "Twitter Search App", MainLauncher = true, Icon = "@drawable/icon", Theme = "@android:style/Theme.Holo.Light.NoActionBar.Fullscreen", ScreenOrientation = ScreenOrientation.Landscape)]
     public class MainActivity : Activity
     {
         private Token twitterToken; 
         private EditText searchText, searchRadius;
         private ListView listViewData;
+        private TextView loading;
+        private ImageView imageLoading;
 
         private Button searchButton;
         protected override void OnCreate(Bundle bundle)
@@ -40,9 +37,7 @@ namespace TwitterSearchApp
         {
             using (var service = new RequestService())
             {
-                //service.SetUpAuth(Constants.ConsumerKey, Constants.AccessTokenSecret, Constants.ConsumerKey, Constants.ConsumerSecret);
                 twitterToken =  await service.GetAccessToken();
-
             }
         }
 
@@ -52,8 +47,17 @@ namespace TwitterSearchApp
             searchRadius = this.FindViewById<EditText>(Resource.Id.editTextSearchRadius);
             searchButton = this.FindViewById<Button>(Resource.Id.buttonSearch);
             listViewData = FindViewById<ListView>(Resource.Id.listView1);
+            loading = FindViewById<TextView>(Resource.Id.textViewLoading);
+            imageLoading = FindViewById<ImageView>(Resource.Id.imageViewLoading);
+            DisplayLoading(false);
             searchButton.Click += async (sender, args) =>
             {
+                DisplayLoading(true);
+
+                if(listViewData.Adapter != null)
+                {
+                    listViewData.Adapter = null;
+                }
                 using (var service = new RequestService())
                 {
                     if (twitterToken != null)
@@ -75,8 +79,23 @@ namespace TwitterSearchApp
             };
         }
 
+        private void DisplayLoading(bool showItems)
+        {
+            if (showItems)
+            {
+                loading.Visibility = ViewStates.Visible;
+                imageLoading.Visibility = ViewStates.Visible;
+            }
+            else
+            {
+                loading.Visibility = ViewStates.Invisible;
+                imageLoading.Visibility = ViewStates.Invisible;
+            }
+        }
+
         private void PopulateListView(TweetsViewModel result)
         {
+            DisplayLoading(false);
             var tweets = result.Tweets.ToList<TweetViewModel>();
 
             if (tweets != null)

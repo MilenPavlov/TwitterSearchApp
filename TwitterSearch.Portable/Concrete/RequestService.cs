@@ -39,7 +39,7 @@ namespace TwitterSearch.Portable.Concrete
             var encodedQuery = Uri.EscapeUriString(query);
             builder.Append(encodedQuery);
             var encodedRadius =
-                Uri.EscapeUriString(string.Format("&geocode={0},{1},{2}mi&count=15", Latitude, Longitude, radiusInMiles));
+                Uri.EscapeUriString(string.Format("&geocode={0},{1},{2}mi", Latitude, Longitude, radiusInMiles));
             builder.Append(encodedRadius);
 
             return builder.ToString();
