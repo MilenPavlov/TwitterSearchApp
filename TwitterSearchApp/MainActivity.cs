@@ -11,18 +11,17 @@ using TwitterSearch.Portable.ViewModels;
 
 namespace TwitterSearchApp
 {
-    using TwitterSearch.Portable.Concrete;
-
     [Activity(Label = "Twitter Search App", MainLauncher = true, Icon = "@drawable/icon", Theme = "@android:style/Theme.Holo.Light.NoActionBar.Fullscreen", ScreenOrientation = ScreenOrientation.Landscape)]
     public class MainActivity : Activity
     {
-        private Token twitterToken; 
         private EditText searchText, searchRadius;
         private ListView listViewData;
         private TextView loading;
         private ImageView imageLoading;
         private Button searchButton;
         private TweetsViewModel viewModel;
+
+        private ObservableAdapter<TweetViewModel> _observableAdapter;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -35,13 +34,31 @@ namespace TwitterSearchApp
 
             SetUpCredentials();
 
-            SetBundings();
+            SetBinding();
         }
 
-        private void SetBundings()
+        private void SetBinding()
         {
             viewModel.SetBinding(() => viewModel.Tweets)
-                .WhenSourceChanges(PopulateListView);
+                .WhenSourceChanges(this.RefreshData);
+        }
+
+        private void RefreshData()
+        {
+            _observableAdapter = viewModel.Tweets.GetAdapter(UpdateTemplate);
+            listViewData.Adapter = _observableAdapter;
+        }
+
+        private View UpdateTemplate(int position, TweetViewModel tvm, View convertView)
+        {
+            View view = convertView ??
+                        this.LayoutInflater.Inflate(Resource.Layout.tweetlayout, null);
+
+            view.FindViewById<TextView>(Resource.Id.textViewPostText).Text = tvm.Text;
+
+            view.FindViewById<TextView>(Resource.Id.textViewPostAuthor).Text = tvm.User;
+
+            return view;
         }
 
         private async void SetUpCredentials()
@@ -49,7 +66,7 @@ namespace TwitterSearchApp
             viewModel = new TweetsViewModel();
             await viewModel.Initialise(() =>
             {
-                PopulateListView();
+ 
             }, true);
         }
 
@@ -68,14 +85,8 @@ namespace TwitterSearchApp
             {
                 DisplayLoading(true);
 
-                //if(listViewData.Adapter != null)
-                //{
-                //    listViewData.Adapter = null;
-                //}
-
-                await viewModel.GetTweets(searchText.Text, Convert.ToInt32(searchRadius.Text));    
-                
-                //PopulateListView();              
+                await viewModel.GetTweets(searchText.Text, Convert.ToInt32(searchRadius.Text));
+                this.DisplayLoading(false);
             };
         }
 
@@ -90,20 +101,6 @@ namespace TwitterSearchApp
             {
                 loading.Visibility = ViewStates.Invisible;
                 imageLoading.Visibility = ViewStates.Invisible;
-            }
-        }
-
-        private void PopulateListView()
-        {
-            DisplayLoading(false);
-            
-            if (viewModel.Tweets != null)
-            {
-                RunOnUiThread(() =>
-                {
-                    var adapter = new TweetsAdapter(this, viewModel.Tweets);
-                    listViewData.Adapter = adapter;
-                });
             }
         }
     }

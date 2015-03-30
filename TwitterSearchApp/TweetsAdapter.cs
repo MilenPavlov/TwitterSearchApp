@@ -40,6 +40,14 @@ namespace TwitterSearchApp
             return view;
         }
 
+        public override int Count
+        {
+            get
+            {
+                return _tweets.Count;
+            }
+        }
+
         private bool IsValidUrl(string imageUrl)
         {
             if (string.IsNullOrWhiteSpace(imageUrl))
@@ -50,8 +58,11 @@ namespace TwitterSearchApp
             return true;
         }
 
-        public override int Count => _tweets.Count;
-
-        public override TweetViewModel this[int position] => _tweets[position];
+        public override TweetViewModel this[int position] {
+            get
+            {
+                return _tweets[position];
+            }
+        }
     }
 }
