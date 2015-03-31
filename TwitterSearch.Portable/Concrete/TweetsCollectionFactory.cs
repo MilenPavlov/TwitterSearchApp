@@ -13,8 +13,9 @@ namespace TwitterSearch.Portable.Concrete
 	        return response.statuses.Select(status => new TweetViewModel
 	        {
 		        User = $"@{status.user.screen_name}",
-				Text = status.text
-	        }).ToList();
+				Text = status.text,
+                GpsCoordinates = status.coordinates.coordinates
+            }).ToList();
         }
     }
 }
