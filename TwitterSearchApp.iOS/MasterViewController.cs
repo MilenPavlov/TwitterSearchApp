@@ -23,6 +23,11 @@ namespace TwitterSearchApp.iOS
 			base.ViewDidLoad();
 
 			var tableViewController = _viewModel.Tweets.GetController(CreateCommentCell, BindCommentCell);
+			tableViewController.SelectionChanged += (s, e) =>
+			{
+				var viewController = new MapViewController {Tweet = tableViewController.SelectedItem};
+				NavigationController.PushViewController(viewController, true);
+			};
 			AddChildViewController(tableViewController);
 			AddSearchBar(tableViewController);
 			AddView(tableViewController);

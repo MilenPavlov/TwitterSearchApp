@@ -16,8 +16,8 @@ namespace TwitterSearch.Portable.Concrete
 				Text = status.text,
                 GpsCoordinates = new GeoPoint
                 {
-	                Latitude = status.coordinates.coordinates.First(),
-					Longitude = status.coordinates.coordinates.Last()
+	                Latitude = status.coordinates.coordinates.Last(),
+					Longitude = status.coordinates.coordinates.First()
 				}
             }).ToList();
         }
