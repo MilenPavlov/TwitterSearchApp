@@ -11,9 +11,6 @@ namespace TwitterSearch.Portable.Concrete
 {
     public class RequestService : IRequestService
     {
-        private const string Longitude = "-1.7889407873153";
-        private const string Latitude = "52.38200776784398";
- 
         public async Task<Token> GetAccessToken()
         {
             using (var client = new HttpHelper())
@@ -41,7 +38,7 @@ namespace TwitterSearch.Portable.Concrete
             var encodedQuery = Uri.EscapeUriString(query);
             builder.Append(encodedQuery);
             var encodedRadius =
-                Uri.EscapeUriString(string.Format("&geocode={0},{1},{2}mi", Latitude, Longitude, radiusInMiles));
+                Uri.EscapeUriString(string.Format("&geocode={0},{1},{2}mi", Constants.Latitude, Constants.Longitude, radiusInMiles));
             builder.Append(encodedRadius);
 
             return builder.ToString();

@@ -3,6 +3,7 @@ using System.Linq;
 using Android.App;
 using Android.Content.PM;
 using Android.Gms.Maps;
+using Android.Gms.Maps.Model;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
@@ -40,7 +41,7 @@ namespace TwitterSearchApp
 
             SetBinding();
 
-            SetUpMap();
+          
         }
 
         private void SetBinding()
@@ -90,7 +91,9 @@ namespace TwitterSearchApp
                 DisplayLoading(true);
 
                 await viewModel.GetTweets(searchText.Text, Convert.ToInt32(searchRadius.Text));
-                this.DisplayLoading(false);             
+                this.DisplayLoading(false);    
+                      
+                SetUpMap();
             };
         }
 
@@ -108,6 +111,21 @@ namespace TwitterSearchApp
                 _mapFragment = MapFragment.NewInstance(mapOptions);
                 fragTx.Add(Resource.Id.map, _mapFragment, "map");
                 fragTx.Commit();
+
+                var map = _mapFragment.Map;
+
+                if (map != null)
+                {
+                    foreach (var tweet in viewModel.Tweets)
+                    {
+                        MarkerOptions markerOpt1 = new MarkerOptions();
+                        markerOpt1.SetPosition(new LatLng(tweet.GpsCoordinates.Latitude, tweet.GpsCoordinates.Longitude));
+                        markerOpt1.SetTitle(tweet.Text);
+                        markerOpt1.InvokeIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueCyan));
+                        map.AddMarker(markerOpt1);
+                    }
+                }
+
             }
         }
 

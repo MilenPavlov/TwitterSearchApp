@@ -12,5 +12,7 @@ namespace TwitterSearch.Portable.Models
         public static string ConsumerSecret = "UYEZWbx5p33axQ6sif0lzVK0fr9yJGvtyF6sHH868UxUa8BxPr";
         public static string AccessToken = "921577188-1Nd1tXNrLSlma4kWnpA82amdSLJhjUUf0weZRpjP";
         public static string AccessTokenSecret = "NPx6uxYzBZZjrwGUEm5CQEerCmNJj3CxWcsWL62LTyza4";
+        public const string Longitude = "-1.7889407873153";
+        public const string Latitude = "52.38200776784398";
     }
 }
