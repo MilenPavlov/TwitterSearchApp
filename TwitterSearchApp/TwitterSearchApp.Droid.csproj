@@ -53,17 +53,14 @@
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GalaSoft.MvvmLight, Version=5.1.1.35049, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmLightLibs.5.1.1\lib\monoandroid1\GalaSoft.MvvmLight.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="GalaSoft.MvvmLight">
+      <HintPath>..\packages\MvvmLightLibs.5.1.1.0\lib\monoandroid1\GalaSoft.MvvmLight.dll</HintPath>
     </Reference>
-    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.1.1.35049, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmLightLibs.5.1.1\lib\monoandroid1\GalaSoft.MvvmLight.Extras.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="GalaSoft.MvvmLight.Extras">
+      <HintPath>..\packages\MvvmLightLibs.5.1.1.0\lib\monoandroid1\GalaSoft.MvvmLight.Extras.dll</HintPath>
     </Reference>
-    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.1.1.35064, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmLightLibs.5.1.1\lib\monoandroid1\GalaSoft.MvvmLight.Platform.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="GalaSoft.MvvmLight.Platform">
+      <HintPath>..\packages\MvvmLightLibs.5.1.1.0\lib\monoandroid1\GalaSoft.MvvmLight.Platform.dll</HintPath>
     </Reference>
     <Reference Include="GooglePlayServicesLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.GooglePlayServices.22.0.0.2\lib\MonoAndroid41\GooglePlayServicesLib.dll</HintPath>

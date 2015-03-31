@@ -70,10 +70,7 @@ namespace TwitterSearchApp
         private async void SetUpCredentials()
         {
             viewModel = new TweetsViewModel();
-            await viewModel.Initialise(() =>
-            {
- 
-            }, true);
+            await viewModel.Initialise();
         }
 
         private void AttachControls()

@@ -13,18 +13,14 @@ namespace TwitterSearch.Portable.ViewModels
 
 		private Token _twitterToken;
 
-		public async Task Initialise(Action action, bool startup = false)
+		public async Task Initialise()
 	    {
 			using (var service = new RequestService())
 			{
 				_twitterToken = await service.GetAccessToken();
 			}
 
-		    if (!startup)
-		    {
-		        await GetTweets();
-		    }
-		    action?.Invoke();
+			await GetTweets();
 		}
 
 	    public async Task GetTweets(string searchString = "", int radiusInMiles = 5)
