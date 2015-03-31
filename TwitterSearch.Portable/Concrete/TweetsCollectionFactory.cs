@@ -14,7 +14,11 @@ namespace TwitterSearch.Portable.Concrete
 	        {
 		        User = $"@{status.user.screen_name}",
 				Text = status.text,
-                GpsCoordinates = status.coordinates.coordinates
+                GpsCoordinates = new GeoPoint
+                {
+	                Latitude = status.coordinates.coordinates.First(),
+					Longitude = status.coordinates.coordinates.Last()
+				}
             }).ToList();
         }
     }

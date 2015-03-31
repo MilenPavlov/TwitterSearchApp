@@ -9,7 +9,7 @@ namespace TwitterSearch.Portable.ViewModels
         public string Text { get; set; }
         public string ImageUrl { get; set; }
 
-        public List<double> GpsCoordinates { get; set; }
+        public GeoPoint GpsCoordinates { get; set; }
     }
 
     public class GeoPoint
