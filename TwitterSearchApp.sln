@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.22609.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitterSearchApp.Droid", "TwitterSearchApp\TwitterSearchApp.Droid.csproj", "{8A2960D5-E97E-4785-B8C2-C2318FCB94E9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitterSearch.Portable", "TwitterSearch.Portable\TwitterSearch.Portable.csproj", "{BCFA0802-2846-4FE8-83A9-7CBF179AE30A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitterSearchApp.iOS", "TwitterSearchApp.iOS\TwitterSearchApp.iOS.csproj", "{B6D42DF2-06E9-4FE1-985A-49D12A83A637}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitterSearchApp.iOS.Forms", "TwitterSearchApp.iOS.Forms\TwitterSearchApp.iOS.Forms.csproj", "{9E8D4249-2467-4E92-AA10-C0CE38060D59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +107,26 @@ Global
 		{B6D42DF2-06E9-4FE1-985A-49D12A83A637}.Release|iPhone.Build.0 = Release|iPhone
 		{B6D42DF2-06E9-4FE1-985A-49D12A83A637}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{B6D42DF2-06E9-4FE1-985A-49D12A83A637}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{9E8D4249-2467-4E92-AA10-C0CE38060D59}.Ad-Hoc|Any CPU.ActiveCfg = Ad-Hoc|iPhone
+		{9E8D4249-2467-4E92-AA10-C0CE38060D59}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{9E8D4249-2467-4E92-AA10-C0CE38060D59}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{9E8D4249-2467-4E92-AA10-C0CE38060D59}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Ad-Hoc|iPhoneSimulator
+		{9E8D4249-2467-4E92-AA10-C0CE38060D59}.Ad-Hoc|iPhoneSimulator.Build.0 = Ad-Hoc|iPhoneSimulator
+		{9E8D4249-2467-4E92-AA10-C0CE38060D59}.AppStore|Any CPU.ActiveCfg = AppStore|iPhone
+		{9E8D4249-2467-4E92-AA10-C0CE38060D59}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{9E8D4249-2467-4E92-AA10-C0CE38060D59}.AppStore|iPhone.Build.0 = AppStore|iPhone
+		{9E8D4249-2467-4E92-AA10-C0CE38060D59}.AppStore|iPhoneSimulator.ActiveCfg = AppStore|iPhoneSimulator
+		{9E8D4249-2467-4E92-AA10-C0CE38060D59}.AppStore|iPhoneSimulator.Build.0 = AppStore|iPhoneSimulator
+		{9E8D4249-2467-4E92-AA10-C0CE38060D59}.Debug|Any CPU.ActiveCfg = Debug|iPhone
+		{9E8D4249-2467-4E92-AA10-C0CE38060D59}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{9E8D4249-2467-4E92-AA10-C0CE38060D59}.Debug|iPhone.Build.0 = Debug|iPhone
+		{9E8D4249-2467-4E92-AA10-C0CE38060D59}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{9E8D4249-2467-4E92-AA10-C0CE38060D59}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{9E8D4249-2467-4E92-AA10-C0CE38060D59}.Release|Any CPU.ActiveCfg = Release|iPhone
+		{9E8D4249-2467-4E92-AA10-C0CE38060D59}.Release|iPhone.ActiveCfg = Release|iPhone
+		{9E8D4249-2467-4E92-AA10-C0CE38060D59}.Release|iPhone.Build.0 = Release|iPhone
+		{9E8D4249-2467-4E92-AA10-C0CE38060D59}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{9E8D4249-2467-4E92-AA10-C0CE38060D59}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
