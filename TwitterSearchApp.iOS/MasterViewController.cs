@@ -22,13 +22,12 @@ namespace TwitterSearchApp.iOS
 		{
 			base.ViewDidLoad();
 
-			await _viewModel.Initialise(() =>
-			{
-				var tableViewController = _viewModel.Tweets.GetController(CreateCommentCell, BindCommentCell);
-				AddChildViewController(tableViewController);
-				AddSearchBar(tableViewController);
-				AddView(tableViewController);
-			});
+			var tableViewController = _viewModel.Tweets.GetController(CreateCommentCell, BindCommentCell);
+			AddChildViewController(tableViewController);
+			AddSearchBar(tableViewController);
+			AddView(tableViewController);
+
+			await _viewModel.Initialise();
 		}
 
 		public async void UpdateSearchResultsForSearchController(UISearchController searchController)
