@@ -173,9 +173,10 @@
             android:minHeight="25px"
             android:id="@+id/linearLayout10"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp">
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="7">
             <LinearLayout
                 android:orientation="horizontal"
                 android:minWidth="25px"
@@ -210,18 +211,41 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:minWidth="25px"
             android:minHeight="25px"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/linearLayout13">
-            <ListView
+            android:id="@+id/linearLayout13"
+            android:layout_weight="1">
+            <LinearLayout
+                android:orientation="horizontal"
                 android:minWidth="25px"
                 android:minHeight="25px"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/listView1" />
+                android:id="@+id/linearLayout14"
+                android:layout_weight="1">
+                <ListView
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:id="@+id/listView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/linearLayoutMap"
+                android:layout_weight="1">
+                <FrameLayout
+                    android:id="@+id/map"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
