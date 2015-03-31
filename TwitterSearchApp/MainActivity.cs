@@ -14,7 +14,7 @@ using TwitterSearch.Portable.ViewModels;
 namespace TwitterSearchApp
 {
     [Activity(Label = "Twitter Search App", MainLauncher = true, Icon = "@drawable/icon", Theme = "@android:style/Theme.Holo.Light.NoActionBar.Fullscreen", ScreenOrientation = ScreenOrientation.Landscape)]
-    public class MainActivity : Activity
+    public class MainActivity : Activity//, IOnMapReadyCallback
     {
         private EditText searchText, searchRadius;
         private ListView listViewData;
@@ -25,6 +25,7 @@ namespace TwitterSearchApp
         private LinearLayout mapLayout;
         private GoogleMap _map;
         private MapFragment _mapFragment;
+        private bool _gettingMap;
 
         private ObservableAdapter<TweetViewModel> _observableAdapter;
 
@@ -41,7 +42,29 @@ namespace TwitterSearchApp
 
             SetBinding();
 
+            SetUpMap();
+
           
+
+        }
+
+        private void MoveCamera()
+        {
+        
+
+            if (_map != null)
+            {
+                LatLng location = new LatLng(Convert.ToDouble(Constants.Latitude), Convert.ToDouble(Constants.Longitude));
+
+                CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
+                builder.Target(location);
+                builder.Zoom(17);
+                builder.Bearing(155);
+                builder.Tilt(80);
+                CameraPosition cameraPosition = builder.Build();
+
+                _map.AnimateCamera(CameraUpdateFactory.NewCameraPosition(cameraPosition));
+            }
         }
 
         private void SetBinding()
@@ -89,12 +112,27 @@ namespace TwitterSearchApp
             searchButton.Click += async (sender, args) =>
             {
                 DisplayLoading(true);
-
+                //SetUpMap();
                 await viewModel.GetTweets(searchText.Text, Convert.ToInt32(searchRadius.Text));
-                this.DisplayLoading(false);    
-                      
-                SetUpMap();
+                this.DisplayLoading(false);
+
+                PopulateMap();
             };
+        }
+
+        private void PopulateMap()
+        {
+            if (_map != null)
+            {
+                foreach (var tweet in viewModel.Tweets)
+                {
+                    MarkerOptions markerOpt1 = new MarkerOptions();
+                    markerOpt1.SetPosition(new LatLng(tweet.GpsCoordinates.Latitude, tweet.GpsCoordinates.Longitude));
+                    markerOpt1.SetTitle(tweet.Text);
+                    //markerOpt1.InvokeIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueCyan));
+                    _map.AddMarker(markerOpt1);
+                }
+            }
         }
 
         private void SetUpMap()
@@ -103,8 +141,8 @@ namespace TwitterSearchApp
             if (_mapFragment == null)
             {
                 GoogleMapOptions mapOptions = new GoogleMapOptions()
-                    .InvokeMapType(GoogleMap.MapTypeSatellite)
-                    .InvokeZoomControlsEnabled(false)
+                    .InvokeMapType(GoogleMap.MapTypeHybrid)
+                    .InvokeZoomControlsEnabled(true)
                     .InvokeCompassEnabled(true);
 
                 FragmentTransaction fragTx = FragmentManager.BeginTransaction();
@@ -112,20 +150,19 @@ namespace TwitterSearchApp
                 fragTx.Add(Resource.Id.map, _mapFragment, "map");
                 fragTx.Commit();
 
-                var map = _mapFragment.Map;
-
-                if (map != null)
+                var mapReadyCallback = new MyOnMapReady();
+                mapReadyCallback.MapReady += (sender, args) =>
                 {
-                    foreach (var tweet in viewModel.Tweets)
-                    {
-                        MarkerOptions markerOpt1 = new MarkerOptions();
-                        markerOpt1.SetPosition(new LatLng(tweet.GpsCoordinates.Latitude, tweet.GpsCoordinates.Longitude));
-                        markerOpt1.SetTitle(tweet.Text);
-                        markerOpt1.InvokeIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueCyan));
-                        map.AddMarker(markerOpt1);
-                    }
-                }
+                    _gettingMap = false;
+                    _map = ((MyOnMapReady)sender).Map;
+                    // set up annotations etc here
 
+                    MoveCamera();
+                };
+
+                _gettingMap = true;
+       
+                _mapFragment.GetMapAsync(mapReadyCallback);
             }
         }
 
@@ -142,6 +179,29 @@ namespace TwitterSearchApp
                 imageLoading.Visibility = ViewStates.Invisible;
             }
         }
+
+        public class MyOnMapReady : Java.Lang.Object, IOnMapReadyCallback
+        {
+            public GoogleMap Map { get; private set; }
+
+            public event EventHandler MapReady;
+
+            public void OnMapReady(GoogleMap googleMap)
+            {
+                Map = googleMap;
+                var handler = MapReady;
+                if (handler != null)
+                    handler(this, EventArgs.Empty);
+            }
+        }
+
+        public void OnMapReady(GoogleMap googleMap)
+        {
+            _gettingMap = false;
+            _map = googleMap;
+        }
     }
+
+    
 }
 
