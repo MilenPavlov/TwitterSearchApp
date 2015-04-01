@@ -4,11 +4,11 @@
              x:Class="TwitterSearch.Portable.Views.TweetsListView">
 	<ContentPage.Content>
 		<StackLayout>
-			<SearchBar x:Name="search"
+			<SearchBar x:Name="Search"
 			   Placeholder="Search"
 			   TextChanged="OnValueChanged"
 			   SearchButtonPressed="OnSearch"/>
-			<ListView x:Name="list" ItemsSource="{Binding Tweets}" ItemTapped="OnItemSelected">
+			<ListView x:Name="List" ItemsSource="{Binding Tweets}" ItemSelected="OnItemSelected">
 				<ListView.ItemTemplate>
 					<DataTemplate>
 						<TextCell Text="{Binding User}"

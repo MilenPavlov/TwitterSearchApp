@@ -21,9 +21,14 @@ namespace TwitterSearch.Portable.Views
 			var task = viewModel.Initialise();
 		}
 
-		public void OnItemSelected(object sender, ItemTappedEventArgs args)
+		public void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
 		{
-			
+			var selectedItem = args.SelectedItem as TweetViewModel;
+			if (selectedItem!= null)
+			{
+				var mapView = new TweetsMapView(selectedItem);
+				Navigation.PushAsync(mapView, true);
+			}
 		}
 
 		public async void OnValueChanged(object sender, TextChangedEventArgs args)
@@ -33,7 +38,7 @@ namespace TwitterSearch.Portable.Views
 
 		public async void OnSearch(object sender, EventArgs args)
 		{
-			await _viewModel.GetTweets(search.Text);
+			await _viewModel.GetTweets(Search.Text);
 		}
 	}
 }
