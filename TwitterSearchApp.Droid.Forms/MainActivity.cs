@@ -16,8 +16,10 @@ namespace TwitterSearchApp.Droid.Forms
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+
             Xamarin.Forms.Forms.Init(this, bundle);
-            LoadApplication(new App());
+
+			LoadApplication(new App());
         }
     }
 }
