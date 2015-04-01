@@ -14,7 +14,7 @@ using TwitterSearch.Portable.ViewModels;
 namespace TwitterSearchApp
 {
     [Activity(Label = "Twitter Search App", MainLauncher = true, Icon = "@drawable/icon", Theme = "@android:style/Theme.Holo.Light.NoActionBar.Fullscreen", ScreenOrientation = ScreenOrientation.Landscape)]
-    public class MainActivity : Activity//, IOnMapReadyCallback
+    public class MainActivity : Activity
     {
         private EditText searchText, searchRadius;
         private ListView listViewData;
@@ -22,7 +22,7 @@ namespace TwitterSearchApp
         private ImageView imageLoading;
         private Button searchButton;
         private TweetsViewModel viewModel;
-        private LinearLayout mapLayout;
+        private LinearLayout _mapLayout;
         private GoogleMap _map;
         private MapFragment _mapFragment;
         private bool _gettingMap;
@@ -35,7 +35,6 @@ namespace TwitterSearchApp
 
             SetContentView(Resource.Layout.Main);
 
-
             AttachControls();
 
             SetUpCredentials();
@@ -43,15 +42,10 @@ namespace TwitterSearchApp
             SetBinding();
 
             SetUpMap();
-
-          
-
         }
 
         private void MoveCamera()
         {
-        
-
             if (_map != null)
             {
                 LatLng location = new LatLng(Convert.ToDouble(Constants.Latitude), Convert.ToDouble(Constants.Longitude));
@@ -105,14 +99,12 @@ namespace TwitterSearchApp
             listViewData = FindViewById<ListView>(Resource.Id.listView1);
             loading = FindViewById<TextView>(Resource.Id.textViewLoading);
             imageLoading = FindViewById<ImageView>(Resource.Id.imageViewLoading);
-            mapLayout = FindViewById<LinearLayout>(Resource.Id.linearLayoutMap);
-            //mapLayout.Visibility = ViewStates.Gone;
+            _mapLayout = FindViewById<LinearLayout>(Resource.Id.linearLayoutMap);
             DisplayLoading(false);
 
             searchButton.Click += async (sender, args) =>
             {
                 DisplayLoading(true);
-                //SetUpMap();
                 await viewModel.GetTweets(searchText.Text, Convert.ToInt32(searchRadius.Text));
                 this.DisplayLoading(false);
 
@@ -155,7 +147,6 @@ namespace TwitterSearchApp
                 {
                     _gettingMap = false;
                     _map = ((MyOnMapReady)sender).Map;
-                    // set up annotations etc here
 
                     MoveCamera();
                 };
@@ -178,30 +169,22 @@ namespace TwitterSearchApp
                 loading.Visibility = ViewStates.Invisible;
                 imageLoading.Visibility = ViewStates.Invisible;
             }
-        }
+        }      
+    }
 
-        public class MyOnMapReady : Java.Lang.Object, IOnMapReadyCallback
-        {
-            public GoogleMap Map { get; private set; }
+    public class MyOnMapReady : Java.Lang.Object, IOnMapReadyCallback
+    {
+        public GoogleMap Map { get; private set; }
 
-            public event EventHandler MapReady;
-
-            public void OnMapReady(GoogleMap googleMap)
-            {
-                Map = googleMap;
-                var handler = MapReady;
-                if (handler != null)
-                    handler(this, EventArgs.Empty);
-            }
-        }
+        public event EventHandler MapReady;
 
         public void OnMapReady(GoogleMap googleMap)
         {
-            _gettingMap = false;
-            _map = googleMap;
+            Map = googleMap;
+            var handler = MapReady;
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
     }
-
-    
 }
 

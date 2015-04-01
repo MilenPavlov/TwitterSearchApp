@@ -8,13 +8,12 @@ using Xamarin.Forms;
 
 namespace TwitterSearch.Portable.Views
 {
-	public class App
+	public class App : Application
 	{
-		public static Page GetMainPage()
-		{
-			var viewModel = new TweetsViewModel();
-			var mainPage = new TweetsListView(viewModel);
-			return new NavigationPage(mainPage);
-		}
+	    public App()
+	    {
+            var viewModel = new TweetsViewModel();
+            MainPage = new TweetsListView(viewModel);
+	    }
 	}
 }

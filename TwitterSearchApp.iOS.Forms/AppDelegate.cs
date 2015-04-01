@@ -16,7 +16,7 @@ namespace TwitterSearchApp.iOS.Forms
 
 			window = new UIWindow(UIScreen.MainScreen.Bounds)
 			{
-				RootViewController = App.GetMainPage().CreateViewController()
+				//RootViewController = App.GetMainPage().CreateViewController()
 			};
 
 			window.MakeKeyAndVisible();
