@@ -1,27 +1,20 @@
 ﻿using Foundation;
 using TwitterSearch.Portable.Views;
 using UIKit;
-using Xamarin.Forms;
+using Xamarin.Forms.Platform.iOS;
 
 namespace TwitterSearchApp.iOS.Forms
 {
 	[Register("AppDelegate")]
-	public partial class AppDelegate : UIApplicationDelegate
+	public partial class AppDelegate : FormsApplicationDelegate
 	{
-		UIWindow window;
-
 		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
 			Xamarin.Forms.Forms.Init();
 
-			window = new UIWindow(UIScreen.MainScreen.Bounds)
-			{
-				//RootViewController = App.GetMainPage().CreateViewController()
-			};
+			LoadApplication(new App());
 
-			window.MakeKeyAndVisible();
-
-			return true;
+			return base.FinishedLaunching(app, options);
 		}
 	}
 }

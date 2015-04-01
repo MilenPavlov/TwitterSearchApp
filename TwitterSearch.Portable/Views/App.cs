@@ -13,7 +13,7 @@ namespace TwitterSearch.Portable.Views
 	    public App()
 	    {
             var viewModel = new TweetsViewModel();
-            MainPage = new TweetsListView(viewModel);
+            MainPage = new NavigationPage(new TweetsListView(viewModel));
 	    }
 	}
 }
