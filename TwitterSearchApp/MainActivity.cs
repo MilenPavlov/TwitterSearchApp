@@ -52,9 +52,8 @@ namespace TwitterSearchApp
 
                 CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
                 builder.Target(location);
-                builder.Zoom(20);
+                builder.Zoom(12);
                 builder.Bearing(155);
-                //builder.Tilt(80);
                 CameraPosition cameraPosition = builder.Build();
 
                 _map.AnimateCamera(CameraUpdateFactory.NewCameraPosition(cameraPosition));
@@ -105,6 +104,7 @@ namespace TwitterSearchApp
             searchButton.Click += async (sender, args) =>
             {
                 DisplayLoading(true);
+                viewModel.Tweets.Clear();
                 await viewModel.GetTweets(searchText.Text, Convert.ToInt32(searchRadius.Text), "50");
                 this.DisplayLoading(false);
 
@@ -121,7 +121,8 @@ namespace TwitterSearchApp
                     MarkerOptions markerOpt1 = new MarkerOptions();
                     markerOpt1.SetPosition(new LatLng(tweet.GpsCoordinates.Latitude, tweet.GpsCoordinates.Longitude));
                     markerOpt1.SetTitle(tweet.Text);
-                    //markerOpt1.InvokeIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueCyan));
+                    if(tweet.Text.ToLower().Contains("etech"))
+                        markerOpt1.InvokeIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueCyan));
                     _map.AddMarker(markerOpt1);
                 }
             }

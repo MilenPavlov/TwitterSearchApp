@@ -418,19 +418,10 @@ namespace TwitterSearchApp
 			public const int linearLayout1 = 2131296279;
 			
 			// aapt resource value: 0x7f090028
-			public const int linearLayout10 = 2131296296;
+			public const int linearLayout13 = 2131296296;
 			
 			// aapt resource value: 0x7f090029
-			public const int linearLayout11 = 2131296297;
-			
-			// aapt resource value: 0x7f09002b
-			public const int linearLayout12 = 2131296299;
-			
-			// aapt resource value: 0x7f09002d
-			public const int linearLayout13 = 2131296301;
-			
-			// aapt resource value: 0x7f09002e
-			public const int linearLayout14 = 2131296302;
+			public const int linearLayout14 = 2131296297;
 			
 			// aapt resource value: 0x7f090027
 			public const int linearLayout2 = 2131296295;
@@ -456,17 +447,17 @@ namespace TwitterSearchApp
 			// aapt resource value: 0x7f090022
 			public const int linearLayout9 = 2131296290;
 			
-			// aapt resource value: 0x7f090030
-			public const int linearLayoutMap = 2131296304;
+			// aapt resource value: 0x7f09002b
+			public const int linearLayoutMap = 2131296299;
 			
-			// aapt resource value: 0x7f090032
-			public const int linearLayoutPostAuthor = 2131296306;
+			// aapt resource value: 0x7f09002d
+			public const int linearLayoutPostAuthor = 2131296301;
 			
-			// aapt resource value: 0x7f09002f
-			public const int listView1 = 2131296303;
+			// aapt resource value: 0x7f09002a
+			public const int listView1 = 2131296298;
 			
-			// aapt resource value: 0x7f090031
-			public const int map = 2131296305;
+			// aapt resource value: 0x7f09002c
+			public const int map = 2131296300;
 			
 			// aapt resource value: 0x7f09000e
 			public const int match_parent = 2131296270;
@@ -507,20 +498,14 @@ namespace TwitterSearchApp
 			// aapt resource value: 0x7f090020
 			public const int textView3 = 2131296288;
 			
-			// aapt resource value: 0x7f09002a
-			public const int textView4 = 2131296298;
-			
-			// aapt resource value: 0x7f09002c
-			public const int textView5 = 2131296300;
-			
 			// aapt resource value: 0x7f090025
 			public const int textViewLoading = 2131296293;
 			
-			// aapt resource value: 0x7f090033
-			public const int textViewPostAuthor = 2131296307;
+			// aapt resource value: 0x7f09002e
+			public const int textViewPostAuthor = 2131296302;
 			
-			// aapt resource value: 0x7f090034
-			public const int textViewPostText = 2131296308;
+			// aapt resource value: 0x7f09002f
+			public const int textViewPostText = 2131296303;
 			
 			// aapt resource value: 0x7f09000f
 			public const int wrap_content = 2131296271;
