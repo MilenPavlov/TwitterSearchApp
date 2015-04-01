@@ -18,8 +18,8 @@ namespace TwitterSearchApp.Droid.Forms
             base.OnCreate(bundle);
 
             Xamarin.Forms.Forms.Init(this, bundle);
-
-			LoadApplication(new App());
+            Xamarin.FormsMaps.Init(this, bundle);
+            LoadApplication(new App());
         }
     }
 }
