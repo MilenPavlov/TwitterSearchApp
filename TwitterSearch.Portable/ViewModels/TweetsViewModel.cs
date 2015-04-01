@@ -23,7 +23,7 @@ namespace TwitterSearch.Portable.ViewModels
 			await GetTweets();
 		}
 
-	    public async Task GetTweets(string searchString = "", int radiusInMiles = 5)
+	    public async Task GetTweets(string searchString = "", int radiusInMiles = 5, string resultCount = "15")
 	    {
 			using (var service = new RequestService())
 			{
@@ -32,7 +32,7 @@ namespace TwitterSearch.Portable.ViewModels
 					return;
 				}
 
-				var list = await service.SearchTweetsAsync(searchString, radiusInMiles, _twitterToken?.access_token);
+				var list = await service.SearchTweetsAsync(searchString, radiusInMiles, _twitterToken?.access_token, resultCount);
 
 				Tweets.Clear();
 				foreach (var tweet in list)

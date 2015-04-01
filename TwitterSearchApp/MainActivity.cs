@@ -52,9 +52,9 @@ namespace TwitterSearchApp
 
                 CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
                 builder.Target(location);
-                builder.Zoom(17);
+                builder.Zoom(20);
                 builder.Bearing(155);
-                builder.Tilt(80);
+                //builder.Tilt(80);
                 CameraPosition cameraPosition = builder.Build();
 
                 _map.AnimateCamera(CameraUpdateFactory.NewCameraPosition(cameraPosition));
@@ -105,7 +105,7 @@ namespace TwitterSearchApp
             searchButton.Click += async (sender, args) =>
             {
                 DisplayLoading(true);
-                await viewModel.GetTweets(searchText.Text, Convert.ToInt32(searchRadius.Text));
+                await viewModel.GetTweets(searchText.Text, Convert.ToInt32(searchRadius.Text), "50");
                 this.DisplayLoading(false);
 
                 PopulateMap();
