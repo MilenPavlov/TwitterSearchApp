@@ -13,6 +13,6 @@ namespace TwitterSearch.Portable.Abstract
     public interface IRequestService : IDisposable
     {
         Task<Token> GetAccessToken();
-		Task<List<TweetViewModel>> SearchTweetsAsync(string query, int radiusInMiles, string token);
+		Task<List<TweetViewModel>> SearchTweetsAsync(string query, int radiusInMiles, string token, string resultsCount);
     }
 }

@@ -19,9 +19,9 @@ namespace TwitterSearch.Portable.Concrete
             }
         }
 
-        public async Task<List<TweetViewModel>> SearchTweetsAsync(string query, int radiusInMiles, string token)
+        public async Task<List<TweetViewModel>> SearchTweetsAsync(string query, int radiusInMiles, string token, string resultCount)
         {
-            var querystring = CreateQueryString(query, radiusInMiles);
+            var querystring = CreateQueryString(query, radiusInMiles, resultCount);
 
             using (var helper = new HttpHelper())
             {
@@ -32,12 +32,12 @@ namespace TwitterSearch.Portable.Concrete
             }
         }
 
-        private string CreateQueryString(string query, int radiusInMiles)
+        private string CreateQueryString(string query, int radiusInMiles, string resultsCount)
         {
             var builder = new StringBuilder();
             var encodedQuery = Uri.EscapeUriString(query);
             builder.Append(encodedQuery);
-            var encodedRadius = Uri.EscapeUriString($"&geocode={Constants.Latitude},{Constants.Longitude},{radiusInMiles}mi");
+            var encodedRadius = Uri.EscapeUriString($"&geocode={Constants.Latitude},{Constants.Longitude},{radiusInMiles}mi&count={resultsCount}");
             builder.Append(encodedRadius);
 
             return builder.ToString();
