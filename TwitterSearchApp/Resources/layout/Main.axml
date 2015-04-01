@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/linearLayout1"
-        android:layout_weight="5">
+        android:layout_weight="7">
         <LinearLayout
             android:orientation="horizontal"
             android:minWidth="25px"
@@ -167,49 +167,6 @@
         android:layout_height="match_parent"
         android:id="@+id/linearLayout2"
         android:layout_weight="2">
-        <LinearLayout
-            android:orientation="horizontal"
-            android:minWidth="25px"
-            android:minHeight="25px"
-            android:id="@+id/linearLayout10"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="7">
-            <LinearLayout
-                android:orientation="horizontal"
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/linearLayout11"
-                android:layout_weight="3"
-                android:gravity="center">
-                <TextView
-                    android:text="User"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/textView4" />
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/linearLayout12"
-                android:layout_weight="1"
-                android:gravity="center">
-                <TextView
-                    android:text="Tweet Content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/textView5" />
-            </LinearLayout>
-        </LinearLayout>
         <LinearLayout
             android:orientation="vertical"
             android:minWidth="25px"
